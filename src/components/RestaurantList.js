@@ -1,17 +1,29 @@
 import { useSelector } from "react-redux";
 import { selectRestaurants } from "../store/restaurants/selectors";
+import { selectRestaurantsWithPizzas } from "../store/selectors";
 
 const RestaurantList = () => {
   const allRestaurants = useSelector(selectRestaurants);
+  const restaurant = useSelector(selectRestaurantsWithPizzas);
+
   console.log(allRestaurants);
   return (
     <div>
       <h2>restaurants</h2>
-      {!allRestaurants ? (
+      {!restaurant ? (
         <p>Loading...</p>
       ) : (
-        allRestaurants.map((hotel, i) => {
-          return <div key={i}>{hotel.name}</div>;
+        restaurant.map((hotel, i) => {
+          return (
+            <div key={i}>
+              <h2>{hotel.name}</h2>
+              <ul>
+                {hotel.pizzas.map((p) => (
+                  <li>{p.name}</li>
+                ))}
+              </ul>
+            </div>
+          );
         })
       )}
     </div>
