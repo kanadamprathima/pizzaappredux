@@ -6,11 +6,16 @@ import {
 import { selectUser } from "../store/user/selectors";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+
 const PizzaList = () => {
   const pizzas = useSelector(selectPizzas);
   const pizzasLength = useSelector(selectNumberOfPizzas);
   const mostbought = useSelector(selectMostBoughtPizza);
   const username = useSelector(selectUser);
+  const pizzas_sorted = [...pizzas].sort((a, b) => {
+    return b.bought - a.bought;
+  });
+
   return (
     <div>
       <h1>Pizza explorer</h1>
@@ -22,12 +27,15 @@ const PizzaList = () => {
         <br />
       </h4>
 
-      {pizzas.map((pizza) => {
+      {pizzas_sorted.map((pizza) => {
         return (
           <MapContainer key={pizza.id}>
             <img src={pizza.image} style={{ width: 200 }} alt="pizzapic" />
             <h2>{pizza.name}</h2>
             <p>{pizza.description}</p>
+            <p>
+              User bought this pizza <strong>{pizza.bought}</strong> times
+            </p>
           </MapContainer>
         );
       })}
