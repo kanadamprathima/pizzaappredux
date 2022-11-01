@@ -4,14 +4,14 @@ import { addPizza } from "../store/pizzas/slice";
 
 const AddPizzaForm = () => {
   const [name, setName] = useState("");
-  const [des, setDes] = useState("");
+  const [description, setDescription] = useState("");
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("new pizza:", name, des);
-    dispatch(addPizza({ name, des }));
+    console.log("new pizza:", name, description);
+    dispatch(addPizza({ name, description }));
     setName(" ");
-    setDes(" ");
+    setDescription(" ");
   };
   return (
     <div>
@@ -29,8 +29,8 @@ const AddPizzaForm = () => {
           Description:
           <input
             type="text"
-            value={des}
-            onChange={(e) => setDes(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </label>
         <button type="submit">add new pizza</button>

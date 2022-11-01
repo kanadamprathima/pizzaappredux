@@ -1,18 +1,17 @@
-import {
-  selectPizzas,
-  selectNumberOfPizzas,
-  selectMostBoughtPizza,
-} from "../store/pizzas/selectors";
-import { selectUser } from "../store/user/selectors";
+import { selectPizzas, selectNumberOfPizzas } from "../store/pizzas/selectors";
+import { selectUser, selectUserFav } from "../store/user/selectors";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddPizzaForm from "./AddPizzaForm";
+import { toggleFavorites } from "../store/user/slice";
 
 const PizzaList = () => {
   const pizzas = useSelector(selectPizzas);
   const pizzasLength = useSelector(selectNumberOfPizzas);
-  const mostbought = useSelector(selectMostBoughtPizza);
+  // const mostbought = useSelector(selectMostBoughtPizza);
   const username = useSelector(selectUser);
+  const userFav = useSelector(selectUserFav);
+  const dispatch = useDispatch();
 
   const pizzas_sorted = [...pizzas].sort((a, b) => {
     return b.bought - a.bought;
@@ -39,6 +38,9 @@ const PizzaList = () => {
             <p>
               User bought this pizza <strong>{pizza.bought}</strong> times
             </p>
+            <button onClick={() => dispatch(toggleFavorites(pizza.id))}>
+              {userFav.includes(pizza.id) ? "❤️" : "🖤"}
+            </button>
           </MapContainer>
         );
       })}

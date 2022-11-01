@@ -10,3 +10,6 @@ export const selectMostBoughtPizza = (reduxState) => {
     return mostBought.bought >= nextPizza.bought ? mostBought : nextPizza;
   });
 };
+export const selectPizzaById = (id) => (reduxState) => {
+  return reduxState.pizzas.allPizzas.find((p) => p.id === id);
+};

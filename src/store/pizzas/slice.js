@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   allPizzas: [
     {
-      id: 161235,
+      id: 1,
       name: "Pizza Margherita",
       description:
         "The typical Neapolitan pizza, made with San Marzano tomatoes, mozzarella cheese, fresh basil, salt and extra-virgin olive oil.",
@@ -13,7 +13,7 @@ const initialState = {
         "https://static01.nyt.com/images/2014/04/09/dining/09JPPIZZA2/09JPPIZZA2-articleLarge-v3.jpg",
     },
     {
-      id: 67283,
+      id: 2,
       name: "Pizza Napoletana",
       description:
         "Neapolitan pizza also known as Naples-style pizza, is a style of pizza made with tomatoes and mozzarella cheese.",
@@ -22,7 +22,7 @@ const initialState = {
         "https://uncutrecipes.com/Images-Recipes-Italian/Pizza-alla-Napoletana-with-Mozzarella-Cheese.jpg",
     },
     {
-      id: 357311,
+      id: 3,
       name: "Pizza Bianca",
       description:
         "White pizza, which omits tomato sauce from the equation, often substituting it with pesto or sour cream.",
@@ -38,10 +38,10 @@ export const pizzaSlice = createSlice({
   initialState,
   reducers: {
     addPizza: (state, action) => {
-      const { name, des } = action.payload;
+      const { name, description } = action.payload;
       const newPizza = {
         name,
-        des,
+        description,
         bought: 0,
       };
       state.allPizzas.push(newPizza);
