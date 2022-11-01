@@ -6,12 +6,14 @@ import {
 import { selectUser } from "../store/user/selectors";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import AddPizzaForm from "./AddPizzaForm";
 
 const PizzaList = () => {
   const pizzas = useSelector(selectPizzas);
   const pizzasLength = useSelector(selectNumberOfPizzas);
   const mostbought = useSelector(selectMostBoughtPizza);
   const username = useSelector(selectUser);
+
   const pizzas_sorted = [...pizzas].sort((a, b) => {
     return b.bought - a.bought;
   });
@@ -26,10 +28,11 @@ const PizzaList = () => {
         there are <strong>{pizzasLength} </strong>pizzas.
         <br />
       </h4>
-
-      {pizzas_sorted.map((pizza) => {
+      <AddPizzaForm />
+      {pizzas_sorted.map((pizza, index) => {
         return (
-          <MapContainer key={pizza.id}>
+          <MapContainer key={index}>
+            <p>{pizza.id}</p>
             <img src={pizza.image} style={{ width: 200 }} alt="pizzapic" />
             <h2>{pizza.name}</h2>
             <p>{pizza.description}</p>
